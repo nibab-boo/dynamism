@@ -271,7 +271,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   simple_form!
-  simple_token_authentication
+  simple_token_authentication (~> 1.0)
   spring
   turbolinks (~> 5)
   tzinfo-data

@@ -1,4 +1,7 @@
 json.array! @blogs do |blog|
   json.extract! blog, :id, :title, :description, :link
-  json.extract! blog.user, :id, :email
-end
+  # json.user do
+  #   json.id blog.user.id
+  #   json.email blog.user.email
+  # end
+end 

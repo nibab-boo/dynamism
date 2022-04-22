@@ -7,7 +7,7 @@ ruby '2.7.4'
 gem 'pundit'
 
 # authentication token gem
-gem 'simple_token_authentication'
+gem 'simple_token_authentication', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'
