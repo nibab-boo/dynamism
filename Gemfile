@@ -9,6 +9,9 @@ gem 'pundit'
 # authentication token gem
 gem 'simple_token_authentication', '~> 1.0'
 
+# cors fix
+gem 'rack-cors'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'
 # Use postgresql as the database for Active Record
