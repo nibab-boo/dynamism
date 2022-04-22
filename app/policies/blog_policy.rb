@@ -6,4 +6,8 @@ class BlogPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
 end
