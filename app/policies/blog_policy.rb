@@ -6,12 +6,20 @@ class BlogPolicy < ApplicationPolicy
     end
   end
 
-  # def show?
-  #   true
-  # end
+  def create?
+    user
+  end
 
-  # def update?
-  #   record.user == user
-  # end
+  def edit?
+    record.user == user
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    edit?
+  end
 
 end
