@@ -9,6 +9,9 @@ gem 'pundit'
 # authentication token gem
 gem 'simple_token_authentication', '~> 1.0'
 
+# amz s3 gem for image upload
+gem 'aws-sdk-s3', require: false
+
 # cors fix
 gem 'rack-cors'
 
