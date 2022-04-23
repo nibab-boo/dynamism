@@ -1,0 +1,32 @@
+<div class="container py-3">
+  <div class="row justify-content-between">
+    <div class="col-md-3 col-sm-12 p-fixed">
+      <%= simple_form_for( @blog, class: "mx-auto") do |f| %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :link %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit class: "btn btn-primary mt-3" %>
+      <% end %>
+    </div>
+    <div class="col-md-8 col-sm-12 cards-container">
+      
+      <% @blogs.each do |blog| %>
+        <div class="blogs-card-admin border" style="width: 240px; height: auto;">
+          <% if blog.photo.attached? %>
+            <%= image_tag blog.image_url, width: "240", alt: "blog image" %>
+          <% end %>
+          <div class="blog-info p-3">
+            <h4><%= blog.title %></h4>
+            <p style= "overflow-wrap: anywhere;">
+              <%= blog.description %>
+            </p>
+            <%= link_to "link", blog.link, class: "btn btn-sm btn-primary" %>
+            <%= link_to "delete", edit_blog_path(blog), class: "btn btn-sm btn-success" %>
+            <%= link_to "delete", blog_path(blog), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete it?" } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
