@@ -1,29 +1,67 @@
 <div class="container py-3">
   <div class="row justify-content-between">
-    <div class="col-md-3 col-sm-12 p-fixed">
-      <%= simple_form_for( @blog, class: "mx-auto") do |f| %>
-        <%= f.input :title %>
-        <%= f.input :description %>
-        <%= f.input :link %>
-        <%= f.input :photo, as: :file %>
-        <%= f.submit class: "btn btn-primary mt-3" %>
-      <% end %>
+    <div class="col-md-3 col-sm-12">
+      <div class="shadow p-3 mb-5 bg-white sticky-top" style="border-radius: 12px; top: 20px;">
+        <%= simple_form_for( @blog, class: "mx-auto") do |f| %>
+          <%= f.input :title %>
+          <%= f.input :description %>
+          <%= f.input :link %>
+          <%= f.input :photo, as: :file %>
+          <%= f.submit class: "btn btn-primary mt-3" %>
+        <% end %>
+      </div>
     </div>
     <div class="col-md-8 col-sm-12 cards-container">
       
       <% @blogs.each do |blog| %>
-        <div class="blogs-card-admin border" style="width: 240px; height: auto;">
+        <div class="blog-card border" style="width: 240px; height: auto;">
           <% if blog.photo.attached? %>
-            <%= image_tag blog.image_url, width: "240", alt: "blog image" %>
+            <%#= image_tag blog.image_url, width: "240", alt: "blog image" %>
+            <%= image_tag "https://media.istockphoto.com/photos/red-wineglass-and-bottle-copy-space-picture-id1297401631?b=1&k=20&m=1297401631&s=170667a&w=0&h=6ZY_oidUVZWgmSwQ1k2Iuan7-MMy30p4JlDyzJFdMXQ=", width: "240", alt: "blog image" %>
           <% end %>
-          <div class="blog-info p-3">
+          <div class="blog-info">
             <h4><%= blog.title %></h4>
-            <p style= "overflow-wrap: anywhere;">
+            <p>
               <%= blog.description %>
             </p>
-            <%= link_to "link", blog.link, class: "btn btn-sm btn-primary" %>
-            <%= link_to "delete", edit_blog_path(blog), class: "btn btn-sm btn-success" %>
-            <%= link_to "delete", blog_path(blog), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete it?" } %>
+            <div>
+              <%= link_to blog.link, class: "btn btn-sm btn-primary" do %>
+                <%# <i class="fa-solid fa-circle-waveform-lines"></i> %>
+                <i class="fa-solid fa-anchor"></i>
+              <% end %>
+              <%= link_to edit_blog_path(blog), class: "btn btn-sm btn-success" do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+              <%= link_to blog_path(blog), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete it?" } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% @blogs.each do |blog| %>
+        <div class="blog-card border" style="width: 240px; height: auto;">
+          <% if blog.photo.attached? %>
+            <%#= image_tag blog.image_url, width: "240", alt: "blog image" %>
+            <%= image_tag "https://media.istockphoto.com/photos/red-wineglass-and-bottle-copy-space-picture-id1297401631?b=1&k=20&m=1297401631&s=170667a&w=0&h=6ZY_oidUVZWgmSwQ1k2Iuan7-MMy30p4JlDyzJFdMXQ=", width: "240", alt: "blog image" %>
+          <% end %>
+          <div class="blog-info">
+            <h4><%= blog.title %></h4>
+            <p>
+              <%= blog.description %>
+            </p>
+            <div>
+              <%= link_to blog.link, class: "btn btn-sm btn-primary" do %>
+                <%# <i class="fa-solid fa-circle-waveform-lines"></i> %>
+                <i class="fa-solid fa-anchor"></i>
+              <% end %>
+              <%= link_to edit_blog_path(blog), class: "btn btn-sm btn-success" do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+              <%= link_to blog_path(blog), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete it?" } do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>
