@@ -2,32 +2,35 @@ class BlogsController < ApplicationController
   before_action :find_blog, only: [ :edit, :update, :destroy ]
 
   def index
-    @blogs = policy_scope(Blog)
+    @blogs = policy_scope(Blog).order(id: :asc)
     @blog = Blog.new
   end
 
   def create
     @blog = Blog.new(blog_param)
+    @blog.user = current_user
     authorize @blog
+    # raise
     if @blog.save
       redirect_to blogs_path
-   else
-      @blogs = Blog.all
+    else
+      @blogs = Blog.order(id: :asc)
       render :index     
    end
   end
 
   def edit
-    @blogs = Blog.all
+    @blogs = Blog.order(id: :asc)
     authorize @blog
     render :index
   end
 
   def update
-    if @blog.update
+    authorize @blog
+    if @blog.update(blog_param)
       redirect_to blogs_path 
     else
-      @blogs = Blog.all
+      @blogs = Blog.order(id: :asc)
       render :index 
     end
   end

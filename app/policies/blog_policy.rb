@@ -7,7 +7,7 @@ class BlogPolicy < ApplicationPolicy
   end
 
   def create?
-    user
+    !!user
   end
 
   def edit?
