@@ -51,6 +51,7 @@ Rails.application.configure do
   config.active_storage.service = :amazon_dev
 
   # Don't care if the mailer can't send.
+  # Care
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false

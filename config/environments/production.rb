@@ -4,6 +4,21 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "http://TODO_PUT_YOUR_DOMAIN_HERE" }
   # Settings specified here will take precedence over those in config/application.rb.
 
+
+    # Mailer config for dev environment
+    # config.action_mailer.perform_deliveries = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default :charset => "utf-8"
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      domain: Rails.application.credentials.email_provider_smtp_domain,
+      authentication: :login,
+      enable_starttls_auto: true,
+      user_name: Rails.application.credentials.email_provider_username,
+      password: Rails.application.credentials.email_provider_password
+    }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
