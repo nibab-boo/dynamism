@@ -1,0 +1,38 @@
+<div class="container py-3">
+  <div class="row justify-content-between">
+    <div class="col-lg-4 col-md-12">
+      <div class="shadow p-3 mb-5 bg-white sticky-top" style="border-radius: 12px; top: 20px;">
+        <h4><%= @user_name %></h4>
+        <div class="user-confidentials">
+          <div>
+            <label for="email">Email</label>
+            <div class="confidential-box">
+              <input type="password" name="email" id="email" value=<%= @user.email %> disabled>
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+            <span>
+              <i class="fa-solid fa-clipboard"></i>
+            </span>
+          </div>
+          <div>
+            <label for="api_key">Api Key</label>
+            <div class="confidential-box">
+              <input type="password" name="api_key" class="ms-auto" id="email" value=<%= @user.authentication_token %> disabled>
+              <i class="fa-solid fa-eye-slash"></i>
+            </div>
+            <span>
+              <i class="fa-solid fa-clipboard"></i>
+            </span>
+          </div>
+          <%# <link class="btn btn-sm btn-primary">Reset Api Key</button> %>
+          <%= link_to "Reset Api Key", "#", class: "btn btn-sm btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-md-12 border shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
+      
+
+
+    </div>
+  </div>
+</div>  

@@ -1,0 +1,22 @@
+.user-confidentials {
+  margin-top: 1rem;
+  div {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+    span {
+      padding: 4px;
+    }
+  }
+  .confidential-box {
+    position: relative;
+    margin-left: auto;
+    margin-right: 8px;
+    i.fa-eye-slash {
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translate(-20%,-50%);
+    }
+  }
+}
