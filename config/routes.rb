@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  get '/users/:id', to: "users#profile"
+  get '/profile', to: "users#profile"
   root to: 'pages#home'
 
   resources :blogs, only: [ :index, :create, :edit, :update, :destroy ]

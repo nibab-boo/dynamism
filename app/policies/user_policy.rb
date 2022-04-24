@@ -4,5 +4,9 @@ class UserPolicy < ApplicationPolicy
     # def resolve
     #   scope.all
     # end
+    
+    def profile?
+      !!user && record == user
+    end
   end
 end
