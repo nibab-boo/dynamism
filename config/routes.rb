@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/profile', to: "users#profile"
+  post '/reset_api', to: "users#reset_api"
   root to: 'pages#home'
 
   resources :blogs, only: [ :index, :create, :edit, :update, :destroy ]

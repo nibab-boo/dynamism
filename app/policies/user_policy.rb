@@ -5,7 +5,13 @@ class UserPolicy < ApplicationPolicy
     #   scope.all
     # end   
   end
+
   def profile?
-    true
+    !!user && record.email = user.email
   end
+
+  def reset_api?
+    profile?
+  end
+  
 end
