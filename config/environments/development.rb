@@ -3,6 +3,20 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   config.action_mailer.default_url_options = { host: "http://localhost:3000" }
   # Settings specified here will take precedence over those in config/application.rb.
+  
+  # Mailer config for dev environment
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: Rails.application.credentials.email_provider_smtp_domain,
+    authentication: :login,
+    enable_starttls_auto: true,
+    user_name: Rails.application.credentials.email_provider_username,
+    password: Rails.application.credentials.email_provider_password
+  }
 
   # Image Url loader Helper
   config.autoloader = :classic
@@ -37,7 +51,7 @@ Rails.application.configure do
   config.active_storage.service = :amazon_dev
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
