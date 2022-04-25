@@ -10,7 +10,6 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_param)
     @blog.user = current_user
     authorize @blog
-    # raise
     if @blog.save
       redirect_to blogs_path
     else
@@ -36,6 +35,7 @@ class BlogsController < ApplicationController
   end
 
   def destroy
+    authorize @blog
     @blog.destroy
     redirect_to blogs_path
   end

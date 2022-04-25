@@ -11,17 +11,20 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-8 col-sm-12 cards-container border shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
+    <div class="col-md-8 col-sm-12 cards-container">
       
       <% if @blogs.empty? %>
-        <strong class="text-center w-100"> No blogs for now </strong>
+        <div class="w-100 text-center shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
+          <strong> No blogs for now </strong>
+        </div>
       <% else %>
       
-        <% @blogs.each do |blog| %> 
-          <div class="blog-card border" style="width: 240px; height: auto;">
+        <% @blogs.each do |blog| %>
+          <div class="blog-card">
             <% if blog.photo.attached? %>
-              <%#= image_tag blog.image_url, width: "240", alt: "blog image" %>
-              <%= image_tag "https://media.istockphoto.com/photos/red-wineglass-and-bottle-copy-space-picture-id1297401631?b=1&k=20&m=1297401631&s=170667a&w=0&h=6ZY_oidUVZWgmSwQ1k2Iuan7-MMy30p4JlDyzJFdMXQ=", width: "240", alt: "blog image" %>
+              <%= image_tag blog.image_url, alt: blog.title  %>
+            <%# else %>
+              <%#= image_tag "https://media.istockphoto.com/photos/red-wineglass-and-bottle-copy-space-picture-id1297401631?b=1&k=20&m=1297401631&s=170667a&w=0&h=6ZY_oidUVZWgmSwQ1k2Iuan7-MMy30p4JlDyzJFdMXQ=", width: "240", alt: "blog image" %>
             <% end %>
             <div class="blog-info">
               <h4><%= blog.title %></h4>
@@ -47,4 +50,4 @@
       <% end %>  
     </div>
   </div>
-</div>
+</div>  
