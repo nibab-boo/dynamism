@@ -14,10 +14,8 @@ export default class extends Controller {
   }
 
   clipboardCopy() {
-    console.log("copying!");
     this.inputTarget.select();
     this.inputTarget.setSelectionRange(0, 99999);
-
     navigator.clipboard.writeText(this.inputTarget.value);
   }
 } 
