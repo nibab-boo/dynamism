@@ -15,15 +15,15 @@
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Blogs", blogs_path, class: "nav-link" %>
+            <%= link_to "Profile", profile_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Menu
+              Apis
             </a>
             <%#= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end text-center px-2" style="border-radius: 8px;" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item rounded-3" %>
+              <%= link_to "Blogs", blogs_path, class: "dropdown-item rounded-3" %>
               <%= link_to "Another action", "#", class: "dropdown-item rounded-3" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item rounded-3" %>
             </div>
