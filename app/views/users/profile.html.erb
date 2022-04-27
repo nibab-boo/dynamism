@@ -37,7 +37,46 @@
         <code>
           <p class="p-2 bg-light mt-2"><%= @user.domain %></p>
         </code>
-        <%= link_to "Change You Domain", "#", method: :post, class: "btn btn-sm btn-info" %>
+        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#changeDomain">Change You Domain</button>
+        <%#= link_to "Change You Domain", "#", method: :post, class: "btn btn-sm btn-info" %>
+        <%# Modal Body %>
+        <div class="modal fade" id="changeDomain" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Domain Setup For <%= @user_name %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(@user, url: user_registration_path, html: { method: :put }) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+
+              <%= f.input :domain,
+                          hint: (@user.domain.empty? ? "Please, add your domain" : "You can change your domain"),
+                          required: false,
+                          input_html: { autocomplete: "domain" } %>
+              <%= f.input :current_password,
+                          hint: "we need your current password to confirm your changes",
+                          required: true,
+                          input_html: { autocomplete: "current-password" } %>
+            </div>
+
+          <div class="modal-footer">
+            <div class="form-actions">
+              <%= f.button :submit, "Update Domain", class: "btn btn-sm btn-warning" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
       </div>
     </div>
     <div class="col-lg-7 col-md-12 border shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
