@@ -28,7 +28,7 @@
               <i class="fa-solid fa-clipboard"></i>
             </span>
           </div>
-          <%= link_to "Reset Api Key", reset_api_path, method: :post, remote: true, class: "btn btn-sm btn-primary" %>
+          <%= link_to "Reset Api Key", reset_api_path, method: :post, remote: true, class: "btn btn-sm btn-primary", data: { confirm: "Are you sure you want to reset your api key?"} %>
         </div>
       </div>
     </div>
