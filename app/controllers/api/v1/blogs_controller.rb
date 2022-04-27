@@ -3,13 +3,11 @@ class Api::V1::BlogsController < Api::V1::BaseController
   # before_action :find_blog, only: [:show, :update]
   def index
     @blogs = policy_scope(Blog)
-
     # Check if the domain is the real domain of user
     check_request_url(request)
     # Will render json.jbuilder by default if no errors with url
   end
 
-  # (https?:\/\/)?#{user.last.domain}:3000\/?
   # def show; end
 
   # def update
@@ -26,8 +24,8 @@ class Api::V1::BlogsController < Api::V1::BaseController
     if request.referrer.nil?
       render json: {error: "Please, provide referrerPolicy. Check #{profile_url} for your api information."}, status: :unauthorized
     else
-      request_url = request.referrer.sub(/https?:\/\//, "")
-      unless /(https?:\/\/)?#{current_user.domain}(^(.\w*)|\/\w*)?/.match?(request_url)
+      should_be_url = current_user.domain.sub(/https?:\/\//, "")
+      unless /(https?:\/\/)?#{should_be_url}(^(.\w*)|\/\w*)?/.match?(request.referrer)
         render :json => {
           error: "#{request.referrer} is not the correct domain of the user."
         }, status: :unauthorized
