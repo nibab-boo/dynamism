@@ -35,9 +35,9 @@
       <div class="shadow p-3 mb-5 bg-white" style="border-radius: 12px; top: 20px;">
         <strong>Your Domain</strong>
         <code>
-          <p class="p-2 bg-light mt-2"><%= @user.domain %></p>
+          <p class="p-2 bg-light mt-2"><%= @user.domain.empty? ? "Please, setup your Domain." : @user.domain %></p>
         </code>
-        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#changeDomain">Change You Domain</button>
+        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#changeDomain"><%= @user.domain.empty? ? "Set my Domain." : "Change my Domain" %></button>
         <%#= link_to "Change You Domain", "#", method: :post, class: "btn btn-sm btn-info" %>
         <%# Modal Body %>
         <div class="modal fade" id="changeDomain" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
