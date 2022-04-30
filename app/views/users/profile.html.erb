@@ -33,7 +33,13 @@
         
       </div>
       <div class="shadow p-3 mb-5 bg-white" style="border-radius: 12px; top: 20px;">
-        <strong>Your Domain</strong>
+        <div class="d-flex justify-content-between">
+          <strong>Your Domain</strong>
+          <div class="form-check form-switch" data-controller="dev-toggle">
+            <input class="form-check-input" type="checkbox" data-action="change->dev-toggle#toggle" role="switch" id="flexSwitchCheckChecked" checked=<%= @user.test %>>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Development</label>
+          </div>
+        </div>
         <code>
           <p class="p-2 bg-light mt-2"><%= @user.domain.empty? ? "Please, setup your Domain." : @user.domain %></p>
         </code>
