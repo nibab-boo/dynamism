@@ -14,4 +14,7 @@ class UserPolicy < ApplicationPolicy
     profile?
   end
   
+  def toggle?
+    profile?
+  end
 end
