@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: "users#profile"
   post '/reset_api', to: "users#reset_api"
+  post '/toggle', to: "users#toggle"
   root to: 'pages#home'
 
   resources :blogs, only: [ :index, :create, :edit, :update, :destroy ]

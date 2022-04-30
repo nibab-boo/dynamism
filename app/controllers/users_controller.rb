@@ -20,4 +20,10 @@ class UsersController < ApplicationController
    end
   end
 
+  def toggle
+    @user = current_user
+    authorize @user
+    @user.update(test: params[:test])
+    render json: { test: @user.test }
+  end
 end
