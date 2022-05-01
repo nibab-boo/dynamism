@@ -29,8 +29,8 @@ class Api::V1::BlogsController < Api::V1::BaseController
       user_domain = current_user.domain.sub(/https?:\/\//, "")
       # INCASE test mode is on
       if current_user.test
-        should_be_url = "(localhost:\\d{4,5}\/?|#{user_domain})"
-        error_message = "#{request.referrer} is not the correct url for test. Please, try changing using localhost instead of your ip address.( Eg. http://localhost:3000 )"
+        should_be_url = "((localhost|\\b\\d{1,3}\.\\d{1,3}\.\\d{1,3}\.\\d{1,3}\\b):\\d{4,5}\/?|#{user_domain})"
+        error_message = "#{request.referrer} is not the correct url for test. Please, try using local server ( Eg. localhost:3000 )."
       else   # INCASE test mode is off
         should_be_url = user_domain
         error_message = "#{request.referrer} is not the correct domain of the user."
