@@ -21,13 +21,25 @@ class Api::V1::BlogsController < Api::V1::BaseController
   private 
 
   def check_request_url(request)
+    
+    # check for referrer
     if request.referrer.nil?
       render json: {error: "Please, provide referrerPolicy. Check #{profile_url} for your api information."}, status: :unauthorized
     else
-      should_be_url = current_user.domain.sub(/https?:\/\//, "")
+      user_domain = current_user.domain.sub(/https?:\/\//, "")
+      # INCASE test mode is on
+      if current_user.test
+        should_be_url = "(localhost:\\d{4,5}\/?|#{user_domain})"
+        error_message = "#{request.referrer} is not the correct url for test. Please, try changing using localhost instead of your ip address.( Eg. http://localhost:3000 )"
+      else   # INCASE test mode is off
+        should_be_url = user_domain
+        error_message = "#{request.referrer} is not the correct domain of the user."
+      end
+
+      # If check doesnot match up, Render this json to user.
       unless /(https?:\/\/)?#{should_be_url}(^(.\w*)|\/\w*)?/.match?(request.referrer)
         render :json => {
-          error: "#{request.referrer} is not the correct domain of the user."
+          error: error_message
         }, status: :unauthorized
       end
     end
