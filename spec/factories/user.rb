@@ -4,6 +4,13 @@ FactoryBot.define do
     password  { "password" }
     confirmed_at { 2.days.ago }
     created_at { 3.days.ago }
-    domain { "www.test.com" }
+    
+    trait :with_domain do
+      domain { "www.test.com" }
+    end
+
+    trait :production do
+      test { false }
+    end
   end
 end

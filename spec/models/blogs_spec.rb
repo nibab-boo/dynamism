@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Blog, type: :model do
-  let(:blog) {
-    blog = Blog.new(title: "Title", description: "New description")
-    blog.valid?
-    # user = User.create(email: "test1@gmail.com", password: "123456", confirmed_at: 2.days.ago, created_at: 3.days.ago)
-    user = create :user
-    blog.update(user: user)
-    return blog
-  }
+  let(:blog) { build :blog }
 
   describe '#initialize' do
     
