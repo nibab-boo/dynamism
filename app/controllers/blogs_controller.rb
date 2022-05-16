@@ -13,13 +13,13 @@ class BlogsController < ApplicationController
     if @blog.save
       redirect_to blogs_path
     else
-      @blogs = Blog.order(id: :asc)
+      @blogs = current_user.blogs.order(id: :asc)
       render :index     
    end
   end
 
   def edit
-    @blogs = Blog.order(id: :asc)
+    @blogs = current_user.blogs.order(id: :asc)
     authorize @blog
     render :index
   end
@@ -29,7 +29,7 @@ class BlogsController < ApplicationController
     if @blog.update(blog_param)
       redirect_to blogs_path 
     else
-      @blogs = Blog.order(id: :asc)
+      @blogs = current_user.blogs.order(id: :asc)
       render :index 
     end
   end
