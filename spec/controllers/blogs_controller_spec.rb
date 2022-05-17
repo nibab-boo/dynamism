@@ -38,6 +38,10 @@ RSpec.describe BlogsController, type: :controller do
           expect(assigns(:blog).id).to_not eq(nil)
         end
 
+        it "increase the count by 1" do
+          expect{ post :create, params: { blog: attributes_for(:blog) } }.to change{Blog.count}.by(1)
+        end
+
         it "redirects to index" do
           expect(response).to redirect_to(blogs_path)
         end
@@ -52,6 +56,10 @@ RSpec.describe BlogsController, type: :controller do
  
         it "returns invalid blog" do
           expect(assigns(:blog).id).to eq(nil)
+        end
+
+        it "count doesnot change" do
+          expect{ post :create, params: { blog: attributes_for(:blog, title: "") } }.to_not change{Blog.count}
         end
 
         it "returns error message" do
@@ -114,6 +122,10 @@ RSpec.describe BlogsController, type: :controller do
           blog.reload
           expect(blog.title).to eq("New Title")
         end
+        
+        it "count doesnot change" do
+          expect{ put :update, params: { blog: attributes_for(:blog, title: "New Title"), id: blog } }.to_not change{Blog.count}
+        end
 
         it "redirects to index" do
           expect(response).to redirect_to(blogs_path)
@@ -147,6 +159,23 @@ RSpec.describe BlogsController, type: :controller do
           Array.new(3) { create(:blog, user: user) } 
           expect(assigns(:blogs)).to match_array(user.blogs.order(id: :asc))
         end
+      end
+    end
+    
+    describe "#delete" do
+      before { blog.save }
+      let(:delete_action) { delete :destroy, params: { id: blog } }
+      it "redirects to index" do
+        expect(delete_action).to redirect_to(blogs_path)
+      end
+      
+      it "blogs doesnot exist" do
+        delete_action
+        expect{blog.reload}.to raise_exception(ActiveRecord::RecordNotFound)
+      end
+      
+      it "decrease the count by 1" do
+        expect{ delete_action }.to change{Blog.count}.by(-1)
       end
     end
   end
