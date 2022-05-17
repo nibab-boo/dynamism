@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'support/factory_bot'
 require 'support/controller_helpers'
+require 'support/api_helpers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -46,6 +47,8 @@ RSpec.configure do |config|
     # Devise Helper for test
     config.include Devise::Test::ControllerHelpers, type: :controller
     config.include ControllerHelpers, type: :controller
+
+    config.include ApiHelpers
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
