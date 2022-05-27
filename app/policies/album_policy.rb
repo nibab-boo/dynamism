@@ -13,4 +13,12 @@ class AlbumPolicy < ApplicationPolicy
   def create?
     record.user == user
   end
+
+  def edit?
+    create?
+  end
+
+  def update?
+    create?
+  end
 end

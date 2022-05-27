@@ -1,9 +1,8 @@
 <div class="container p-5 mt-5">
-  <h4 class="my-5">New Album</h4>
+  <h4 class="my-5">Edit Album</h4>
   <%= simple_form_for(@album) do |f| %>
     <%= f.input :title %>
     <%= f.input :albumPhotos, as: :file, input_html: { multiple: true, accept:"image/*", length: "6"} %>      
     <%= f.submit 'Submit' %>
   <% end %>
 </div>
-  

@@ -7,12 +7,12 @@
   <% @albums&.each do |album| %>
     <div class="container p-3 m-2">
       <h3><%= album.title %></h3>
+      <h5> <%= link_to "edit", edit_album_path(album), class: "btn btn-warning btn-sm" %> </h5>
       <% album.albumPhotos.each do |albumPhoto| %>
          <%= albumPhoto.photo %>
         <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
       <% end %>
-      
-    </div>    
+    </div>
   <% end %>
   
 
