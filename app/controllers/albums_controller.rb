@@ -1,14 +1,17 @@
 class AlbumsController < ApplicationController
 
   def index
-
+    @album = policy_scope(Album)
   end
 
   def new
-
+    @album = Album.new
+    authorize @album
   end
 
   def create
+    
+    byebug
 
   end
 

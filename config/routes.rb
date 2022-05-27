@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   # User side
   resources :blogs, expect: [ :new, :edit ]
-  resource :albums
+  resources :albums, only: [ :index, :new , :create] 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :blogs, only: [ :index ]

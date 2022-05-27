@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="">
+    <%= link_to "new album", new_album_path, class: "btn btn-sm btn-block btn-primary" %>
+  </div>
+
+  
+  <% @albums&.each do |album| %>
+    <div class="container p-3 m-2">
+      
+      <% album.albumPhotos.each do |albumPhoto| %>
+        <%= image_tag albumPhoto.photo.url, width: "200px", alt: "image" %>        
+      <% end %>
+      
+    </div>    
+  <% end %>
+  
+
+
+</div>
