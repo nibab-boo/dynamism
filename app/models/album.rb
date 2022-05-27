@@ -1,6 +1,9 @@
 class Album < ApplicationRecord
-  has_many_attached :photos
 
   validates :title, presence: true
-  validates :photos, limit: { max: 6 }
+  has_many :albumPhoto
+
+
+
+  # validates :photos, limit: { max: 6 }
 end

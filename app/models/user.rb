@@ -8,4 +8,5 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   has_many :blogs
+  has_many :albums
 end
