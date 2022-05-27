@@ -6,9 +6,10 @@
   
   <% @albums&.each do |album| %>
     <div class="container p-3 m-2">
-      
+      <h3><%= album.title %></h3>
       <% album.albumPhotos.each do |albumPhoto| %>
-        <%= image_tag albumPhoto.photo.url, width: "200px", alt: "image" %>        
+         <%= albumPhoto.photo %>
+        <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
       <% end %>
       
     </div>    

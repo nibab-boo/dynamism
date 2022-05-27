@@ -9,4 +9,8 @@ class AlbumPolicy < ApplicationPolicy
   def new?
     !!user
   end
+
+  def create?
+    record.user == user
+  end
 end

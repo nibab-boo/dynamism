@@ -1,7 +1,7 @@
 class Album < ApplicationRecord
   belongs_to :user
   validates :title, presence: true
-  has_many :albumPhotos
+  has_many :albumPhotos, dependent: :destroy
   before_save :photos_count_within_bounds
 
   private
@@ -11,7 +11,7 @@ class Album < ApplicationRecord
     errors.add("Too many photos") if photos.size > 10
   end
 
-  accepts_nested_attributes_for :albumPhotos
+  # accepts_nested_attributes_for :albumPhotos
 
   # validates :photos, limit: { max: 6 }
 end

@@ -1,7 +1,9 @@
 class AlbumsController < ApplicationController
 
   def index
-    @album = policy_scope(Album)
+    @albums = policy_scope(Album)
+
+    p @albums
   end
 
   def new
@@ -10,9 +12,16 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    
-    byebug
-
+    @album = Album.new(album_param)
+    @album.user = current_user
+    @album.save
+    params[:album][:albumPhotos].each do |blob|
+      albumPhoto = AlbumPhoto.new(photo: blob)
+      albumPhoto.album = @album
+      albumPhoto.save
+    end
+    authorize @album
+    redirect_to :index
   end
 
   def edit
@@ -29,7 +38,11 @@ class AlbumsController < ApplicationController
 
   private
 
-  def album_params
-    params.require(:album).permit( :title, :photos )
+  def album_param
+    params.require(:album).permit( :title )
+  end
+
+  def album_photos_param
+    params.require(:album).permit( albumPhotos: [] )
   end
 end
