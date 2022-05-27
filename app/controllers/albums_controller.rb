@@ -14,12 +14,12 @@ class AlbumsController < ApplicationController
     @album = Album.new(album_param)
     @album.user = current_user
     @album.save
+    authorize @album
     params[:album][:albumPhotos]&.each do |blob|
       albumPhoto = AlbumPhoto.new(photo: blob)
       albumPhoto.album = @album
       albumPhoto.save
     end
-    authorize @album
     redirect_to action: :index
   end
 
@@ -44,6 +44,11 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
+    @album = Album.find(params[:id])
+    authorize @album
+
+    @album.destroy
+    redirect_to action: :index
   end
 
   private
