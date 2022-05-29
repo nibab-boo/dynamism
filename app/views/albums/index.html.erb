@@ -12,6 +12,7 @@
           <span data-action="click->album-edit#enable">
             <i class="fa-solid fa-pen-to-square"></i>
           </span>
+          <%= link_to "delete", album_path(album), method: :delete, "data-album-edit-target": "delete", class: "btn btn-danger btn-sm mx-2 d-none" %>
         </div>
         <div>
           <%= simple_form_for(album, html: {class: "d-none", "data-album-edit-target": "photosForm"} ) do |f| %>
@@ -20,7 +21,6 @@
             <button type="submit" class="btn btn-sm btn-primary">Upload</button>
           <% end %>
           <button data-action="click->album-edit#toggleForm" class="btn btn-warning btn-sm mx-2">Add a photo</button>
-          <%#= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %>
           <%#= link_to "Add a photo", edit_album_path(album), "data-action": "click->album-edit#addImage", class: "btn btn-warning btn-sm mx-2" %>
         </div>
       </h3>

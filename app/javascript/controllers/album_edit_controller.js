@@ -4,7 +4,7 @@ import e from 'turbolinks';
 
 export default class extends Controller {
 
-  static targets = [ "title", "photosForm" ]
+  static targets = [ "title", "photosForm", "delete" ]
   connect() {
     console.log("connected");
   }
@@ -13,10 +13,11 @@ export default class extends Controller {
     this.titleTarget.disabled = false;
     this.titleTarget.focus();
     this.titleTarget.setSelectionRange(this.titleTarget.value.length, this.titleTarget.value.length)
+    this.deleteTarget.classList.remove("d-none")
   }
 
   save() {
-    console.log("saved");
+    this.deleteTarget.classList.add("d-none")
     this.titleTarget.disabled = true;
     const formData = new FormData();
     if ( this.titleTarget.dataset.old !== this.titleTarget.value ) {
