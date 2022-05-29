@@ -11,7 +11,7 @@
       <h5> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm" %> </h5>
       <% album.albumPhotos.each do |albumPhoto| %>
         <%= albumPhoto.photo %>
-        
+        <%= link_to "delete this image", album_album_photo_path(album, albumPhoto), method: :delete, class: "btn btn-danger btn-sm" %>
         <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
       <% end %>
     </div>
