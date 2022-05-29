@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # User side
   resources :blogs, except: [ :show, :new ]
   resources :albums, except: [ :show ] do
-    resources :album_photos, only: [ :destroy ]
+    resources :album_photos, only: [ :destroy, :create ]
   end
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

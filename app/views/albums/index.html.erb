@@ -1,22 +1,43 @@
 <div class="container">
-  <div class="">
-    <%= link_to "new album", new_album_path, class: "btn btn-sm btn-block btn-primary" %>
+  <div class="d-grid mt-3">
+    <%= link_to "Add a album", new_album_path, class: "btn btn-sm btn-block btn-primary" %>
   </div>
 
-  
   <% @albums&.each do |album| %>
-    <div class="container p-3 m-2">
-      <h3><%= album.title %></h3>
-      <h5> <%= link_to "edit", edit_album_path(album), class: "btn btn-warning btn-sm" %> </h5>
-      <h5> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm" %> </h5>
-      <% album.albumPhotos.each do |albumPhoto| %>
-        <%= albumPhoto.photo %>
-        <%= link_to "delete this image", album_album_photo_path(album, albumPhoto), method: :delete, class: "btn btn-danger btn-sm" %>
-        <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
+    <div class="container shadow p-3 my-5 bg-body rounded album-box">
+      <%# ALBUM HEADER %>
+      <h3 class="d-flex justify-content-between" data-controller="album-edit">
+        <div class="album-title">
+          <input data-album-edit-target="title" data-action="focusout->album-edit#save" type="text" data-old="<%= album.title %>" name="title" id="<%= album.id %>" value="<%= album.title %>" disabled>
+          <span data-action="click->album-edit#enable">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </span>
+          <%= link_to "delete", album_path(album), method: :delete, "data-album-edit-target": "delete", class: "btn btn-danger btn-sm mx-2 d-none" %>
+        </div>
+        <div>
+          <%# FORM FOR IMAGE UPLOAD %>
+          <%= simple_form_for(:albumPhoto, url: album_album_photos_path(album), html: {class: "d-none", "data-album-edit-target": "photosForm"} ) do |f| %>
+            <%= f.input "photos", as: :file, input_html: { multiple: true, accept:"image/*", class: "d-inline-block m-0", "data-action": "change->album-edit#filesCounter"},
+              label: "CHOOSE FILES" %>
+            <button type="submit" class="btn btn-sm btn-primary">Upload</button>
+          <% end %>
+          <button data-action="click->album-edit#toggleForm" class="btn btn-warning btn-sm mx-2">Add a photo</button>
+          <%#= link_to "Add a photo", edit_album_path(album), "data-action": "click->album-edit#addImage", class: "btn btn-warning btn-sm mx-2" %>
+        </div>
+      </h3>
+
+      <%# ALBUM PHOTO SECTION %>
+      <div class="d-flex flex-wrap photo-card-box">
+        <% album.albumPhotos.each do |albumPhoto| %>
+        <%# PHOTO CARD %>
+        <div class="album-photo-card">
+          <%= link_to "<i class='fa-solid fa-circle-xmark'></i>".html_safe, album_album_photo_path(album, albumPhoto), method: :delete %>
+          <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
+        </div>
       <% end %>
+      
+      </div>
     </div>
   <% end %>
-  
-
 
 </div>
