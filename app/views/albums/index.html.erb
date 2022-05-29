@@ -15,8 +15,9 @@
           <%= link_to "delete", album_path(album), method: :delete, "data-album-edit-target": "delete", class: "btn btn-danger btn-sm mx-2 d-none" %>
         </div>
         <div>
-          <%= simple_form_for(album, html: {class: "d-none", "data-album-edit-target": "photosForm"} ) do |f| %>
-            <%= f.input "photoAlbums", as: :file, input_html: { multiple: true, accept:"image/*", class: "d-inline-block m-0", "data-action": "change->album-edit#filesCounter"},
+          <%# FORM FOR IMAGE UPLOAD %>
+          <%= simple_form_for(:albumPhoto, url: album_album_photos_path(album), html: {class: "d-none", "data-album-edit-target": "photosForm"} ) do |f| %>
+            <%= f.input "photos", as: :file, input_html: { multiple: true, accept:"image/*", class: "d-inline-block m-0", "data-action": "change->album-edit#filesCounter"},
               label: "CHOOSE FILES" %>
             <button type="submit" class="btn btn-sm btn-primary">Upload</button>
           <% end %>

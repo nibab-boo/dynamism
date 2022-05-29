@@ -9,4 +9,8 @@ class AlbumPhotoPolicy < ApplicationPolicy
   def destroy?
     record.album.user === user
   end
+
+  def create?
+    record.user ===user
+  end
 end

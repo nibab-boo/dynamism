@@ -16,6 +16,7 @@ class AlbumsController < ApplicationController
     @album.save
     authorize @album
     params[:album][:albumPhotos]&.each do |blob|
+      return if @album.albumPhotos.count >= 6
       albumPhoto = AlbumPhoto.new(photo: blob)
       albumPhoto.album = @album
       albumPhoto.save
@@ -32,14 +33,7 @@ class AlbumsController < ApplicationController
     byebug
     @album = Album.find(params[:id])
     authorize @album
-    if @album.update(album_param)
-    # params[:album][:albumPhotos]&.each do |blob|
-    #   return if @album.albumPhotos.count >= 6
-    #   albumPhoto = AlbumPhoto.new(photo: blob)
-    #   albumPhoto.album = @album
-    #   albumPhoto.save
-    # end
-    
+    if @album.update(album_param)  
       render json: { title: @album.title }
     else
       error_json = {
