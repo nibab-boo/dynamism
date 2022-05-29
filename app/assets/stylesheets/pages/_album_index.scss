@@ -1,0 +1,33 @@
+.album-photo-card {
+  position: relative;
+  width: 160px;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 2em;
+
+  &:hover a {
+    display: inline-block;
+  }
+  a {
+    display: none;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 32px;
+    color: rgba(255, 0, 0, 0.375);
+    
+    &:hover {
+      color: rgba(255, 0, 0, 0.514);
+    }
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}

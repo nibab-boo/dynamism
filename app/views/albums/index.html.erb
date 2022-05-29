@@ -5,6 +5,7 @@
 
   <% @albums&.each do |album| %>
     <div class="container shadow p-3 my-5 bg-body rounded">
+      <%# ALBUM HEADER %>
       <h3 class="d-flex justify-content-between">
         <%= album.title %>
         <div>
@@ -12,28 +13,17 @@
           <span> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %> </span>
         </div>
       </h3>
-      <% album.albumPhotos.each do |albumPhoto| %>
-        <%= link_to "delete this image", album_album_photo_path(album, albumPhoto), method: :delete, class: "btn btn-danger btn-sm" %>
-        <%#= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
-      <% end %>
-    </div>
-  <% end %>
-  <% @albums&.each do |album| %>
-    <div class="container shadow p-3 my-5 bg-body rounded">
-      <h3 class="d-flex justify-content-between">
-        <%= album.title %>
-        <div>
-          <span> <%= link_to "Add a photo", edit_album_path(album), class: "btn btn-warning btn-sm mx-2" %> </span>
-          <span> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %> </span>
+
+      <div class="d-flex flex-wrap">
+        <% album.albumPhotos.each do |albumPhoto| %>
+        <%# PHOTO CARD %>
+        <div class="album-photo-card">
+          <%= link_to "<i class='fa-solid fa-circle-xmark'></i>".html_safe, album_album_photo_path(album, albumPhoto), method: :delete %>
+          <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
         </div>
-      </h3>
-      <% album.albumPhotos.each do |albumPhoto| %>
-        <%= link_to "delete this image", album_album_photo_path(album, albumPhoto), method: :delete, class: "btn btn-danger btn-sm" %>
-        <%#= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
       <% end %>
+      
+      </div>
     </div>
   <% end %>
-  
-
-
 </div>
