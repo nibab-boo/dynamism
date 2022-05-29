@@ -6,14 +6,20 @@
   <% @albums&.each do |album| %>
     <div class="container shadow p-3 my-5 bg-body rounded">
       <%# ALBUM HEADER %>
-      <h3 class="d-flex justify-content-between">
-        <%= album.title %>
+      <h3 class="d-flex justify-content-between" data-controller="album-edit">
+        <div class="album-title">
+          <input data-album-edit-target="title" data-action="focusout->album-edit#save" type="text" name="title" id="<%= album.id %>" value="<%= album.title %>" disabled>
+          <span data-action="click->album-edit#enable">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </span>
+        </div>
         <div>
-          <span> <%= link_to "Add a photo", edit_album_path(album), class: "btn btn-warning btn-sm mx-2" %> </span>
-          <span> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %> </span>
+          <%= link_to "Add a photo", edit_album_path(album), "data-action": "click->album-edit#addImage", class: "btn btn-warning btn-sm mx-2" %>
+          <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %>
         </div>
       </h3>
 
+      <%# ALBUM PHOTO SECTION %>
       <div class="d-flex flex-wrap">
         <% album.albumPhotos.each do |albumPhoto| %>
         <%# PHOTO CARD %>
@@ -26,4 +32,5 @@
       </div>
     </div>
   <% end %>
+
 </div>
