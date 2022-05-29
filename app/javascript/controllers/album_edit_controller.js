@@ -4,7 +4,7 @@ import e from 'turbolinks';
 
 export default class extends Controller {
 
-  static targets = [ "title" ]
+  static targets = [ "title", "photosForm" ]
   connect() {
     console.log("connected");
   }
@@ -35,6 +35,20 @@ export default class extends Controller {
           .then(data => {
             this.titleTarget.value = data.title;
           });
+    }
   }
+
+  toggleForm(e) {
+    if (this.photosFormTarget.classList.contains("d-none")) {
+      console.log("hidden");
+      this.photosFormTarget.classList.add("d-inline-flex", "align-items-baseline");
+      this.photosFormTarget.classList.remove("d-none");
+      e.currentTarget.textContent = "Close"
+    } else {
+      console.log("shown");
+      this.photosFormTarget.classList.remove("d-inline-flex", "align-items-baseline");
+      this.photosFormTarget.classList.add("d-none");
+      e.currentTarget.textContent = "Add a photo"
+    }
   }
 }

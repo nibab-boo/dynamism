@@ -29,7 +29,7 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    # byebug
+    byebug
     @album = Album.find(params[:id])
     authorize @album
     if @album.update(album_param)
