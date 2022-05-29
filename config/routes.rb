@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   # User side
-  resources :blogs, expect: [ :new, :edit ]
+  resources :blogs, except: [ :show, :new ]
   resources :albums, except: [ :show ] do
     resources :album_photos, only: [ :destroy ]
   end
