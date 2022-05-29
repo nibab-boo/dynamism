@@ -6,6 +6,16 @@
   border-radius: 8px;
   margin: 2em;
 
+  &.blurred::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(230, 113, 197, 0.722), rgba(63, 67, 188, 0.74));
+  }
+
   &:hover a {
     display: inline-block;
   }
