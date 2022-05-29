@@ -53,6 +53,7 @@ export default class extends Controller {
   filesCounter(e) {
     // console.log("In counter");
     const files = e.currentTarget.files;
+    document.querySelectorAll(".blurred").forEach(el => el.remove());
     console.log(files);
     e.currentTarget.previousElementSibling.textContent = `${files.length} FILES`
     const parentDiv = (e.currentTarget.closest(".album-box"));
@@ -62,7 +63,7 @@ export default class extends Controller {
       const reader = new FileReader();
       reader.addEventListener("load", ()=> {
         const src = reader.result;
-        const imgCard = `<div class="album-photo-card">
+        const imgCard = `<div class="album-photo-card blurred">
                         <img src= ${src} />    
                       </div>`
         imageBox.insertAdjacentHTML("beforeend", imgCard);
