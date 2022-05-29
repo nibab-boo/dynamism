@@ -29,18 +29,27 @@ class AlbumsController < ApplicationController
   end
 
   def update
+    # byebug
     @album = Album.find(params[:id])
     authorize @album
-    @album.update(album_param)
-    params[:album][:albumPhotos]&.each do |blob|
-      return if @album.albumPhotos.count >= 6
-      albumPhoto = AlbumPhoto.new(photo: blob)
-      albumPhoto.album = @album
-      albumPhoto.save
-    end
+    if @album.update(album_param)
+    # params[:album][:albumPhotos]&.each do |blob|
+    #   return if @album.albumPhotos.count >= 6
+    #   albumPhoto = AlbumPhoto.new(photo: blob)
+    #   albumPhoto.album = @album
+    #   albumPhoto.save
+    # end
     
-
-    redirect_to action: :index
+      render json: { title: @album.title }
+    else
+      error_json = {
+        errors: @album.errors.full_messages
+      }
+      @album.reload
+      error_json[:title] = @album.title
+      render json: error_json
+    end
+    # redirect_to action: :index
   end
 
   def destroy
