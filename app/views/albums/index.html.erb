@@ -1,18 +1,35 @@
 <div class="container">
-  <div class="">
-    <%= link_to "new album", new_album_path, class: "btn btn-sm btn-block btn-primary" %>
+  <div class="d-grid mt-3">
+    <%= link_to "Add a album", new_album_path, class: "btn btn-sm btn-block btn-primary" %>
   </div>
 
-  
   <% @albums&.each do |album| %>
-    <div class="container p-3 m-2">
-      <h3><%= album.title %></h3>
-      <h5> <%= link_to "edit", edit_album_path(album), class: "btn btn-warning btn-sm" %> </h5>
-      <h5> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm" %> </h5>
+    <div class="container shadow p-3 my-5 bg-body rounded">
+      <h3 class="d-flex justify-content-between">
+        <%= album.title %>
+        <div>
+          <span> <%= link_to "Add a photo", edit_album_path(album), class: "btn btn-warning btn-sm mx-2" %> </span>
+          <span> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %> </span>
+        </div>
+      </h3>
       <% album.albumPhotos.each do |albumPhoto| %>
-        <%= albumPhoto.photo %>
         <%= link_to "delete this image", album_album_photo_path(album, albumPhoto), method: :delete, class: "btn btn-danger btn-sm" %>
-        <%= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
+        <%#= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
+      <% end %>
+    </div>
+  <% end %>
+  <% @albums&.each do |album| %>
+    <div class="container shadow p-3 my-5 bg-body rounded">
+      <h3 class="d-flex justify-content-between">
+        <%= album.title %>
+        <div>
+          <span> <%= link_to "Add a photo", edit_album_path(album), class: "btn btn-warning btn-sm mx-2" %> </span>
+          <span> <%= link_to "delete", album_path(album), method: :delete, class: "btn btn-danger btn-sm mx-2" %> </span>
+        </div>
+      </h3>
+      <% album.albumPhotos.each do |albumPhoto| %>
+        <%= link_to "delete this image", album_album_photo_path(album, albumPhoto), method: :delete, class: "btn btn-danger btn-sm" %>
+        <%#= image_tag albumPhoto.image_url, height: "200px", alt: "image" %>        
       <% end %>
     </div>
   <% end %>
