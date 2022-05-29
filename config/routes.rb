@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   post '/toggle', to: "users#toggle"
   root to: 'pages#home'
 
-  resources :blogs, only: [ :index, :create, :edit, :update, :destroy ]
+  # User side
+  resources :blogs, except: [ :show, :new ]
+  resources :albums, except: [ :show ] do
+    resources :album_photos, only: [ :destroy ]
+  end
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :blogs, only: [ :index ]
