@@ -40,15 +40,34 @@ export default class extends Controller {
 
   toggleForm(e) {
     if (this.photosFormTarget.classList.contains("d-none")) {
-      console.log("hidden");
       this.photosFormTarget.classList.add("d-inline-flex", "align-items-baseline");
       this.photosFormTarget.classList.remove("d-none");
       e.currentTarget.textContent = "Close"
     } else {
-      console.log("shown");
       this.photosFormTarget.classList.remove("d-inline-flex", "align-items-baseline");
       this.photosFormTarget.classList.add("d-none");
-      e.currentTarget.textContent = "Add a photo"
+      e.currentTarget.textContent = "Add a photo";
     }
+  }
+
+  filesCounter(e) {
+    // console.log("In counter");
+    const files = e.currentTarget.files;
+    console.log(files);
+    e.currentTarget.previousElementSibling.textContent = `${files.length} FILES`
+    const parentDiv = (e.currentTarget.closest(".album-box"));
+    const imageBox = parentDiv.querySelector(".photo-card-box");
+    
+    Object.keys(files).forEach( function (key) {
+      const reader = new FileReader();
+      reader.addEventListener("load", ()=> {
+        const src = reader.result;
+        const imgCard = `<div class="album-photo-card">
+                        <img src= ${src} />    
+                      </div>`
+        imageBox.insertAdjacentHTML("beforeend", imgCard);
+      });
+      reader.readAsDataURL(files[key]);
+    });
   }
 }
