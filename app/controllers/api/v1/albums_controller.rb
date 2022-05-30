@@ -8,6 +8,13 @@ class Api::V1::AlbumsController < Api::V1::BaseController
     # Will render json.jbuilder by default if no errors with url
   end
 
+  def show
+    @album = Album.find_by(title: params[:id])
+    authorize @album
+
+    check_request_url(request)
+  end
+
 
 
   private 

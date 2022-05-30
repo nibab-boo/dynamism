@@ -6,23 +6,26 @@ class AlbumPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    record.user == user
+  end
   def new?
     !!user
   end
 
   def create?
-    record.user == user
+    show?
   end
 
   def edit?
-    create?
+    show?
   end
 
   def update?
-    create?
+    show?
   end
 
   def destroy?
-    create?
+    show?
   end
 end
