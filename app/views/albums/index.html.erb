@@ -3,6 +3,7 @@
     <%= link_to "Add a album", new_album_path, class: "btn btn-sm btn-block btn-primary" %>
   </div>
 
+  <%# ALBUM-BOXES  %>
   <% @albums&.each do |album| %>
     <div class="container shadow p-3 my-5 bg-body rounded album-box">
       <%# ALBUM HEADER %>
@@ -16,13 +17,12 @@
         </div>
         <div>
           <%# FORM FOR IMAGE UPLOAD %>
-          <%= simple_form_for(:albumPhoto, url: album_album_photos_path(album), html: {class: "d-none", "data-album-edit-target": "photosForm"} ) do |f| %>
+          <%= simple_form_for(:albumPhoto, url: album_album_photos_path(album), html: {class: "d-none bg-light", "data-album-edit-target": "photosForm"} ) do |f| %>
             <%= f.input "photos", as: :file, input_html: { multiple: true, accept:"image/*", class: "d-inline-block m-0", "data-action": "change->album-edit#filesCounter"},
               label: "CHOOSE FILES" %>
             <button type="submit" class="btn btn-sm btn-primary">Upload</button>
           <% end %>
           <button data-action="click->album-edit#toggleForm" class="btn btn-warning btn-sm mx-2">Add a photo</button>
-          <%#= link_to "Add a photo", edit_album_path(album), "data-action": "click->album-edit#addImage", class: "btn btn-warning btn-sm mx-2" %>
         </div>
       </h3>
 
