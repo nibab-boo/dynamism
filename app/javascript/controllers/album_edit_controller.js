@@ -19,12 +19,8 @@ export default class extends Controller {
   save() {
     this.deleteTarget.classList.add("d-none")
     this.titleTarget.disabled = true;
-    const formData = new FormData();
+    // SEND REQUEST ONLY IF CHANGED.
     if ( this.titleTarget.dataset.old !== this.titleTarget.value ) {
-
-      formData.append("album['title']", this.titleTarget.value)
-      console.log( JSON.stringify(formData));
-      console.log(`/albums/${this.titleTarget.id}`);
       fetch(`/albums/${this.titleTarget.id}`, {
         method: 'PATCH',
         headers: {
@@ -32,10 +28,11 @@ export default class extends Controller {
             'X-CSRF-Token': csrfToken()
           },
           body: JSON.stringify({ album: { title: this.titleTarget.value } })
-        }).then(response => response.json())
-          .then(data => {
-            this.titleTarget.value = data.title;
-          });
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.titleTarget.value = data.title;
+        });
     }
   }
 
@@ -52,16 +49,16 @@ export default class extends Controller {
   }
 
   filesCounter(e) {
-    // console.log("In counter");
     const files = e.currentTarget.files;
+    // REMOVES PREVIOUS BLURRED IMAGES
     document.querySelectorAll(".blurred").forEach(el => el.remove());
-    console.log(files);
     e.currentTarget.previousElementSibling.textContent = `${files.length} FILES`
     const parentDiv = (e.currentTarget.closest(".album-box"));
     const imageBox = parentDiv.querySelector(".photo-card-box");
     
     Object.keys(files).forEach( function (key) {
       const reader = new FileReader();
+      // FILE ON FINISHED LOADING
       reader.addEventListener("load", ()=> {
         const src = reader.result;
         const imgCard = `<div class="album-photo-card blurred">
@@ -69,6 +66,7 @@ export default class extends Controller {
                       </div>`
         imageBox.insertAdjacentHTML("beforeend", imgCard);
       });
+      // READ THE FILE
       reader.readAsDataURL(files[key]);
     });
   }
