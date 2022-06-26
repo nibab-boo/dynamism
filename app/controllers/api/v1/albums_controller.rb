@@ -9,7 +9,7 @@ class Api::V1::AlbumsController < Api::V1::BaseController
   end
 
   def show
-    @album = Album.find_by(title: params[:id])
+    @album = current_user.albums.find_by(title: params[:id])
     authorize @album
 
     check_request_url(request)
