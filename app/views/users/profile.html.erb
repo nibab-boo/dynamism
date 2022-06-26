@@ -80,12 +80,45 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-7 col-md-12 border shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
-      <div>
+    <div class="col-lg-7 col-md-12">
+      <%# BLOG CODE %>
+      <div class=" border shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
         <h3 style="color: gray;">Blogs</h3>
         <div class="fetch-code p-3 bg-light rounded">
           <code>
             fetch('https://www.dynamism.com/blogs', {<br>
+              &#160;referrerPolicy: 'origin-when-cross-origin',<br>
+              &#160;headers: {<br>
+                &#160; 'Content-Type': 'application/json',<br>
+                &#160; 'X-User-Email': < EMAIL >, <br>
+                &#160; 'X-User-Token': < API_KEY >, <br> 
+              &#160;}<br>
+            }).then(response => response.json())<br>
+            .then(data => console.log(data))<br>  
+          </code>
+        </div>
+      </div>
+      <%# ALBUM CODE %>
+      <div class=" border shadow p-3 mb-5 bg-white" style="border-radius: 12px;">
+        <h3 style="color: gray;">Blogs</h3>
+        <div class="fetch-code p-3 bg-light rounded">
+          <code>
+            # All Albums<br>
+            fetch('https://www.dynamism.com/api/v1/albums', {<br>
+              &#160;referrerPolicy: 'origin-when-cross-origin',<br>
+              &#160;headers: {<br>
+                &#160; 'Content-Type': 'application/json',<br>
+                &#160; 'X-User-Email': < EMAIL >, <br>
+                &#160; 'X-User-Token': < API_KEY >, <br> 
+              &#160;}<br>
+            }).then(response => response.json())<br>
+            .then(data => console.log(data))<br>  
+          </code>
+        </div>
+        <div class="fetch-code p-3 bg-light rounded">
+          <code>
+            # Single Album<br>
+            fetch('https://www.dynamism.com/api/v1/albums/< album title >', {<br>
               &#160;referrerPolicy: 'origin-when-cross-origin',<br>
               &#160;headers: {<br>
                 &#160; 'Content-Type': 'application/json',<br>
